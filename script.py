@@ -13,16 +13,14 @@ def read_xyz(fname):
 def read_gro(fname):
     with open(fname) as f:
         *_, last_line = f.readlines()
-        del _
-    box_vector = np.fromstring(last_line,
+    vector = np.fromstring(last_line,
                  dtype=float,
                  sep=' ')
     return np.genfromtxt(fname, skip_header=2, skip_footer=1,
                names = ['mid', 'mol', 'atom', 'id', 'x', 'y', 'z'],
                dtype = "i4,S5,S6,i4,f4,f4,f4",
-               invalid_raise=True,
-               autostrip=True,
-               delimiter=[5,5,5,5,8,8,8]), box_vector
+               invalid_raise=True, autostrip=True,
+               delimiter=[5,5,5,5,8,8,8]), vector
 
 
 
@@ -30,7 +28,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("filename", type=str, help="the name of xyz-file")
     args = parser.parse_args()
-    print(read_gro(args.filename))
+    filename = args.filename
+    if filename.endswith(".xyz"):
+        print(read_xyz(filename))
+    elif filename.endswith(".gro"):
+        print(read_gro(args.filename))
 
 
 if __name__ == "__main__":
