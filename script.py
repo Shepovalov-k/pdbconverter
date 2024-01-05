@@ -32,7 +32,7 @@ def main():
     if filename.endswith(".xyz"):
         print(read_xyz(filename))
     elif filename.endswith(".gro"):
-        print(read_gro(args.filename))
+        print(read_gro(filename))
 
 
 if __name__ == "__main__":
