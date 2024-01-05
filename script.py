@@ -14,14 +14,14 @@ def read_gro(fname):
     with open(fname) as f:
         *_, last_line = f.readlines()
         del _
-    vector = np.fromstring(last_line,
+    box_vector = np.fromstring(last_line,
                  dtype=float,
                  sep=' ')
     return np.genfromtxt(fname, skip_header=2, skip_footer=1,
                names = ['mid', 'mol', 'atom', 'id', 'x', 'y', 'z'],
                dtype = "i4,S5,S6,i4,f4,f4,f4",
                invalid_raise=True, autostrip=True,
-               delimiter=[5,5,5,5,8,8,8]), vector
+               delimiter=[5,5,5,5,8,8,8]), box_vector
 
 
 
