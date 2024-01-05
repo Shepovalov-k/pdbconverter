@@ -20,7 +20,8 @@ def read_gro(fname):
     return np.genfromtxt(fname, skip_header=2, skip_footer=1,
                names = ['mid', 'mol', 'atom', 'id', 'x', 'y', 'z'],
                dtype = "i4,S5,S6,i4,f4,f4,f4",
-               invalid_raise=True, autostrip=True,
+               invalid_raise=True,
+               autostrip=True,
                delimiter=[5,5,5,5,8,8,8]), box_vector
 
 
